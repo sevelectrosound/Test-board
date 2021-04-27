@@ -18,13 +18,22 @@ void setup()
 {
   Serial.begin(9600);
   pinMode(13, OUTPUT);
+  pinMode(0, OUTPUT);
+  pinMode(1, OUTPUT);
+  pinMode(2, OUTPUT);
+  pinMode(3, OUTPUT);
+  pinMode(22, INPUT_PULLUP);
   digitalWrite(13, HIGH);
+  digitalWrite(0,LOW);
+  digitalWrite(1,LOW);
+  digitalWrite(2,LOW);
+  digitalWrite(3,LOW);
   AudioMemory(20);   
   sgtl5000_1.enable();
   sgtl5000_1.volume(0.6);
   waveform1.begin(WAVEFORM_SAWTOOTH);
-  waveform1.amplitude(0.75);
-  waveform1.frequency(50.00);
+  //waveform1.amplitude(0.75);
+  waveform1.frequency(240.00);
   waveform1.pulseWidth(0.15);
   
 }
@@ -35,9 +44,17 @@ void loop()
   // delay(300);
   // digitalWrite(13, LOW);
   // delay(300);
-  for(int freq = 50; freq <=500; freq++) {
-    waveform1.frequency(freq);
-    delay(10);
-  }
+  // for(int freq = 50; freq <=500; freq++) {
+  //   waveform1.frequency(freq);
+  //   delay(10);
+  // }
+  int pinValue = analogRead(22);
+  float value = (1023 - pinValue)/1023.00;
+  // Serial.print("pinValue = ");
+  // Serial.print(pinValue);
+  // Serial.print("; value = ");
+  // Serial.println(value);
+  waveform1.amplitude(value);
+  //delay(100);
   
 }

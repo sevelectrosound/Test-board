@@ -47,6 +47,7 @@ void loop()
   // for(int freq = 50; freq <=500; freq++) {
   //   waveform1.frequency(freq);
   //   delay(10);
+  //connect
   // }
   int pinValue = analogRead(22);
   float value = (1023 - pinValue)/1023.00;
@@ -55,6 +56,6 @@ void loop()
   // Serial.print("; value = ");
   // Serial.println(value);
   waveform1.amplitude(value);
-  //delay(100);
+  delay(100);
   
 }

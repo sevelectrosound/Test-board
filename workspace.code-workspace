@@ -8,5 +8,10 @@
 			"path": "Test LED display"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"files.associations": {
+			"type_traits": "cpp",
+			"utility": "cpp"
+		}
+	}
 }

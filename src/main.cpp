@@ -13,6 +13,7 @@ AudioConnection          patchCord1(waveform1, 0, i2s1, 0);
 AudioConnection          patchCord2(waveform1, 0, i2s1, 1);
 AudioControlSGTL5000     sgtl5000_1;     //xy=641.0000152587891,216.75000667572021
 // GUItool: end automatically generated code
+int treshold = 200;
 
 void setup() 
 {
@@ -38,9 +39,17 @@ void setup()
   
 }
 
+float mapInput(int readValue)
+{
+  int avalue = map(readValue, 0, 1023, 1023,0);
+  float result = ((avalue - treshold)/1023.00);
+  Serial.println(result);
+  return result;
+}
+
 void loop()
 {
-  // digitalWrite(13, HIGH);
+   digitalWrite(13, HIGH);
   // delay(300);
   // digitalWrite(13, LOW);
   // delay(300);
@@ -50,12 +59,13 @@ void loop()
   //connect
   // }
   int pinValue = analogRead(22);
-  float value = (1023 - pinValue)/1023.00;
+  // float value = mapInput(pinValue);
   // Serial.print("pinValue = ");
   // Serial.print(pinValue);
   // Serial.print("; value = ");
   // Serial.println(value);
-  waveform1.amplitude(value);
+
+  waveform1.amplitude(mapInput(pinValue));
   delay(100);
   
 }
